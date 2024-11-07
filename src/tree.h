@@ -19,6 +19,11 @@ namespace s21
     Tree() noexcept {};
     explicit Tree(const value_type &elem) noexcept { insert(elem); }
     Tree(std::initializer_list<value_type> const &items);
+    Tree(const std::vector<value_type>& items) {
+        for (const auto& item : items) {
+            insert(item);
+        }
+    }
     Tree(const Tree &other) noexcept { *this = other; };
     Tree(Tree &&other) noexcept { this->swap(other); };
     ~Tree() { clear(); };

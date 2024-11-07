@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <limits>
+#include <memory>
 #include "../tree.h"
 namespace s21
 {
@@ -12,21 +13,26 @@ namespace s21
     private:
     public:
         using key_type = K;
-        using value_type = K;
+        using value_type = key_type;
         using reference = K &;
         using const_reference = const K &;
         using size_type = size_t;
-        using iterator = typename Tree<K>::iterator;
-        using const_iterator = typename Tree<K>::const_iterator;
+        using iterator = typename Tree<key_type>::iterator;
+        using const_iterator = typename Tree<key_type>::const_iterator;
         // iterator
         // const_iterator
 
-        Set() : tree_()
-        {
-        }
-        Set(std::initializer_list<value_type> const &items) : tree_(init) {}
-        Set(const Set &s) : tree_(s.tree_) {}
-        Set(Set &&s) noexcept : tree_(std::move(s.tree_)) {}
+        Set() : tree_(){}
+        Set(std::initializer_list<key_type> init) {
+            std::vector<std::pair<const key_type, key_type>> pair_init;
+            for (const auto &key : init) {
+                pair_init.push_back(std::make_pair(key, key));
+            }
+            tree_ = Tree<key_type, key_type>(pair_init);
+
+         }
+        Set(const Set &other) : tree_(other.tree_) {}
+        Set(Set &&other) noexcept : tree_(std::move(other.tree_)) {}
         ~Set() = default;
 
         Set &operator=(const Set &other)

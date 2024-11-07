@@ -2,13 +2,14 @@
 #define S21_MAP_H
 
 #include <vector>
+#include <iostream>
 
 #include "s21_tree.h"
 
 namespace s21
 {
 
-  template <typename K, typename V>
+  template <typename K, typename V = K>
   class Map
   {
   public:
