@@ -4,7 +4,7 @@
 #include <vector>
 #include <iostream>
 
-#include "s21_tree.h"
+#include "../tree.h"
 
 namespace s21
 {

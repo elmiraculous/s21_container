@@ -14,15 +14,16 @@ namespace s21
     using mapped_type = V;
     using size_type = size_t;
     using value_type = std::pair<const key_type, mapped_type>;
-    
 
     Tree() noexcept {};
     explicit Tree(const value_type &elem) noexcept { insert(elem); }
     Tree(std::initializer_list<value_type> const &items);
-    Tree(const std::vector<value_type>& items) {
-        for (const auto& item : items) {
-            insert(item);
-        }
+    Tree(const std::vector<value_type> &items)
+    {
+      for (const auto &item : items)
+      {
+        insert(item);
+      }
     }
     Tree(const Tree &other) noexcept { *this = other; };
     Tree(Tree &&other) noexcept { this->swap(other); };
@@ -162,7 +163,7 @@ namespace s21
     {
       for (iterator it = other.begin(); it != other.end(); ++it)
       {
-        this->insert(it);
+        this->insert(*it);
       }
     }
     return *this;

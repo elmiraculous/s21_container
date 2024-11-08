@@ -13,7 +13,7 @@ namespace s21
     private:
     public:
         using key_type = K;
-        using value_type = key_type;
+        using value_type = K;
         using reference = K &;
         using const_reference = const K &;
         using size_type = size_t;
@@ -22,15 +22,16 @@ namespace s21
         // iterator
         // const_iterator
 
-        Set() : tree_(){}
-        Set(std::initializer_list<key_type> init) {
+        Set() : tree_() {}
+        Set(std::initializer_list<key_type> init)
+        {
             std::vector<std::pair<const key_type, key_type>> pair_init;
-            for (const auto &key : init) {
+            for (const auto &key : init)
+            {
                 pair_init.push_back(std::make_pair(key, key));
             }
             tree_ = Tree<key_type, key_type>(pair_init);
-
-         }
+        }
         Set(const Set &other) : tree_(other.tree_) {}
         Set(Set &&other) noexcept : tree_(std::move(other.tree_)) {}
         ~Set() = default;
@@ -63,7 +64,8 @@ namespace s21
 
         std::pair<iterator, bool> insert(const value_type &value)
         {
-            return tree_.insert(value);
+            // return tree_.insert(value);
+            return tree_.insert(std::make_pair(value, value));
         }
 
         iterator begin() const { return tree_.begin(); }
